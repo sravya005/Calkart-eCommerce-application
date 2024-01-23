@@ -1,0 +1,64 @@
+<header>
+  <div class="navbar bg-primary shadow-sm">
+    <div class="navbar-brand align-item-center d-flex">
+      <i class="fas fa-shipping-fast logo">
+        &nbsp;
+
+        <strong routerLink="/">calKart</strong>
+      </i>
+
+      <div class="form-group search-bar">
+        <input
+          type="text"
+          placeholder="Search Product"
+          [(ngModel)]="searchKey"
+          (keyup)="search($event)"
+          class="form-control"
+        />
+        <span class="fas fa-search search-icon"></span>
+      </div>
+    </div>
+
+    <!-- <button *ngIf="currentUser"><i class="fas fa-user"></i></button>
+    <button *ngIf="!currentUser" routerLink="/login" class="btn btn-primary">
+      Login
+    </button> -->
+
+    <div class="col" *ngIf="!!currentUser">
+      <div ngbDropdown class="d-inline-block">
+        <button class="btn btn-dropdown" id="dropdownBasic1" ngbDropdownToggle>
+          {{ !!currentUser.name ? currentUser.name : currentUser.email }}
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem>Profile</button>
+          <button ngbDropdownItem (click)="logout()">Logout</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col" *ngIf="!currentUser">
+      <button class="btn btn-dropdown" id="dropdownBasic1" routerLink="/login">
+        Login
+      </button>
+    </div>
+
+    <div class="col" *ngIf="!!currentUser && !!currentUser.isAdmin">
+      <div ngbDropdown class="d-inline-block">
+        <button class="btn btn-dropdown" id="dropdownBasic1" ngbDropdownToggle>
+          Admin
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem routerLink="../admin/userlist">Users</button>
+          <button ngbDropdownItem routerLink="../admin/productlist">
+            Products
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <button routerLink="/cart" class="btn bty-primary">
+      <i class="fas fa-cart-plus cart-icon"></i>
+      <div class="badge bg-danger">{{ totalItems }}</div>
+    </button>
+  </div>
+</header>
